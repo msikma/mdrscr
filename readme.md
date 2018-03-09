@@ -1,3 +1,5 @@
+[![npm version](https://badge.fury.io/js/mdrscr.svg)](https://badge.fury.io/js/mdrscr)
+
 mdrscr - Mandarake Scraper
 ==========================
 
