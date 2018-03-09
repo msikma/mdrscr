@@ -1,5 +1,5 @@
 /**
- * mdrscr - Mandarake Scraper <https://bitbucket.org/msikma/mdrscr>
+ * mdrscr - Mandarake Scraper <https://github.com/msikma/mdrscr>
  * Copyright © 2018, Michiel Sikma
  */
 
