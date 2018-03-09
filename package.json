@@ -3,13 +3,14 @@
   "description": "Mandarake scraping library",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://bitbucket.org/msikma/mdrscr",
+  "homepage": "https://github.com/msikma/mdrscr",
   "main": "src/index.js",
   "scripts": {
     "lint": "cross-env NODE_PATH=./ eslint src; exit 0"
   },
+  "repository": "https://github.com/msikma/mdrscr",
   "author": "Michiel Sikma <michiel@sikma.org>",
-  "license": "SEE LICENSE IN <readme.md>",
+  "license": "MIT",
   "dependencies": {
     "babel-eslint": "^7.2.3",
     "babel-plugin-transform-class-properties": "^6.1.0",
