@@ -1,9 +1,9 @@
 {
   "name": "mdrscr",
   "description": "Mandarake scraping library",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "homepage": "https://github.com/msikma/mdrscr",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "lint": "cross-env NODE_PATH=./ eslint src; exit 0",
     "build": "babel src --presets babel-preset-env --plugins transform-class-properties,transform-object-rest-spread --out-dir dist"
