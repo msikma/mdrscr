@@ -5,8 +5,8 @@
 
 import cheerio from 'cheerio'
 
-import { requestAsBrowser } from 'src/util/request'
-import * as shops from 'src/mandarake/shops'
+import { requestAsBrowser } from '../util/request'
+import * as shops from './shops'
 
 // List of shops by their English and Japanese names.
 const shopsByName = {

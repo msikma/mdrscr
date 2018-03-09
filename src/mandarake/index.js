@@ -3,9 +3,9 @@
  * Copyright © 2018, Michiel Sikma
  */
 
-import { MANDARAKE_ORDER_BASE, MANDARAKE_AUCTION_BASE, fetchMandarakeSearch } from 'src/mandarake/scrape'
-import { EVERYTHING } from 'src/mandarake/categories'
-import { ALL_STORES } from 'src/mandarake/shops'
+import { MANDARAKE_ORDER_BASE, MANDARAKE_AUCTION_BASE, fetchMandarakeSearch } from './scrape'
+import { EVERYTHING } from './categories'
+import { ALL_STORES } from './shops'
 
 // Mandarake mail order site.
 const orderURL = `${MANDARAKE_ORDER_BASE}/order/listPage/list?`

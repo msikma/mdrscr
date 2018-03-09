@@ -3,7 +3,7 @@
  * Copyright © 2018, Michiel Sikma
  */
 
-import * as categories from 'src/mandarake/categories'
-import * as shops from 'src/mandarake/shops'
-export { mandarakeSearch as default } from 'src/mandarake'
+import * as categories from './mandarake/categories'
+import * as shops from './mandarake/shops'
+export { mandarakeSearch as default } from './mandarake'
 export { categories, shops }
