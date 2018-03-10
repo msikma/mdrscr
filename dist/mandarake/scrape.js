@@ -49,15 +49,15 @@ var ORDER_ITEM = exports.ORDER_ITEM = function ORDER_ITEM(code) {
 // Some constant strings and regular expressions for parsing result contents.
 var IN_STOCK = { ja: '在庫あります', en: 'In stock' };
 var IN_STOREFRONT = { ja: '在庫確認します', en: 'Store Front Item' };
-var PRICE = { ja: new RegExp('([0-9]+)円\\+税'), en: new RegExp('([0-9]+) yen') };
+var PRICE = { ja: new RegExp('([0-9,]+)円(\\+税)?'), en: new RegExp('([0-9,]+) yen') };
 var ITEM_NO = new RegExp('(.+?)(\\(([0-9]+)\\))?$');
 
 /**
- * Parses a price string, e.g. '500円+税', and returns only the number.
+ * Parses a price string, e.g. '500円+税', '1,000円+税' and returns only the number.
  */
 var parsePrice = function parsePrice(price, lang) {
   var match = price.match(PRICE[lang]);
-  return match && Number(match[1]);
+  return match && Number(match[1].replace(',', ''));
 };
 
 /**
