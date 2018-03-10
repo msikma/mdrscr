@@ -28,7 +28,7 @@ const PRICE = { ja: new RegExp('([0-9,]+)円(\\+税)?'), en: new RegExp('([0-9,]
 const ITEM_NO = new RegExp('(.+?)(\\(([0-9]+)\\))?$')
 
 /**
- * Parses a price string, e.g. '500円+税', and returns only the number.
+ * Parses a price string, e.g. '500円+税', '1,000円+税' and returns only the number.
  */
 const parsePrice = (price, lang) => {
   const match = price.match(PRICE[lang])
