@@ -6,6 +6,7 @@
 
 config.js
 cookies.txt
+test*.js
 
 # Development files.
 _source
