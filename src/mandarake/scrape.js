@@ -24,7 +24,7 @@ export const ORDER_ITEM = code => `${MANDARAKE_ORDER_BASE}/order/detailPage/item
 // Some constant strings and regular expressions for parsing result contents.
 const IN_STOCK = { ja: '在庫あります', en: 'In stock' }
 const IN_STOREFRONT = { ja: '在庫確認します', en: 'Store Front Item' }
-const PRICE = { ja: new RegExp('([0-9]+)円\\+税'), en: new RegExp('([0-9]+) yen') }
+const PRICE = { ja: new RegExp('([0-9,]+)円(\\+税)?'), en: new RegExp('([0-9,]+) yen') }
 const ITEM_NO = new RegExp('(.+?)(\\(([0-9]+)\\))?$')
 
 /**
@@ -32,7 +32,7 @@ const ITEM_NO = new RegExp('(.+?)(\\(([0-9]+)\\))?$')
  */
 const parsePrice = (price, lang) => {
   const match = price.match(PRICE[lang])
-  return match && Number(match[1])
+  return match && Number(match[1].replace(',', ''))
 }
 
 /**
