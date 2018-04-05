@@ -1,7 +1,7 @@
 {
   "name": "mdrscr",
   "description": "Mandarake scraping library",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "homepage": "https://github.com/msikma/mdrscr",
   "main": "dist/index.js",
   "scripts": {
