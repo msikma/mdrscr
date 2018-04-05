@@ -12,6 +12,7 @@
   "author": "Michiel Sikma <michiel@sikma.org>",
   "license": "MIT",
   "dependencies": {
+    "file-cookie-store": "msikma/file-cookie-store",
     "babel-eslint": "^7.2.3",
     "babel-plugin-transform-class-properties": "^6.1.0",
     "babel-plugin-transform-object-rest-spread": "^6.1.0",

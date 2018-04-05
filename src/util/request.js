@@ -4,6 +4,7 @@
  */
 
 import request from 'request-promise-native'
+import FileCookieStore from 'file-cookie-store'
 
 // These headers are sent with each request to make us look more like a real browser.
 const browserHeaders = {
