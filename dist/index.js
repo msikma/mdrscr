@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.shops = exports.categories = exports.default = undefined;
+exports.shops = exports.categories = exports.unloadCookies = exports.loadCookies = exports.getMandarakeFavorites = exports.default = undefined;
 
 var _mandarake = require('./mandarake');
 
@@ -11,6 +11,27 @@ Object.defineProperty(exports, 'default', {
   enumerable: true,
   get: function get() {
     return _mandarake.mandarakeSearch;
+  }
+});
+Object.defineProperty(exports, 'getMandarakeFavorites', {
+  enumerable: true,
+  get: function get() {
+    return _mandarake.getMandarakeFavorites;
+  }
+});
+
+var _scrape = require('./mandarake/scrape');
+
+Object.defineProperty(exports, 'loadCookies', {
+  enumerable: true,
+  get: function get() {
+    return _scrape.loadCookies;
+  }
+});
+Object.defineProperty(exports, 'unloadCookies', {
+  enumerable: true,
+  get: function get() {
+    return _scrape.unloadCookies;
   }
 });
 
