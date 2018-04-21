@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "file-cookie-store": "msikma/file-cookie-store",
+    "lodash": "^4.17.5",
     "cheerio": "^1.0.0-rc.2",
     "include-path": "^0.4.7",
     "request": "^2.83.0",

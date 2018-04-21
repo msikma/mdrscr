@@ -3,14 +3,16 @@
  * Copyright © 2018, Michiel Sikma
  */
 
-import { MANDARAKE_ORDER_BASE, MANDARAKE_AUCTION_BASE, fetchMandarakeSearch } from './scrape'
+import { MANDARAKE_ORDER_BASE, MANDARAKE_AUCTION_BASE, fetchMandarakeSearch, fetchMandarakeFavorites } from './scrape'
 import { EVERYTHING } from './categories'
 import { ALL_STORES } from './shops'
 
 // Mandarake mail order site.
-const orderURL = `${MANDARAKE_ORDER_BASE}/order/listPage/list?`
+const MANDARAKE_ORDER_URL = `${MANDARAKE_ORDER_BASE}/order/listPage/list`
 // Mandarake auction site.
-const auctionURL = `${MANDARAKE_AUCTION_BASE}/auction/item/itemsListEn.html?category=plamo`
+const MANDARAKE_AUCTION_URL = `${MANDARAKE_AUCTION_BASE}/auction/item/itemsListEn.html?category=plamo`
+// Page URL for a Mandarake user's favorites list.
+const MANDARAKE_FAVS_URL = `${MANDARAKE_ORDER_BASE}/order/MyPage/favoritesList`
 
 // Default search details. Every search overrides these values.
 // You can change anything, but it's not recommended to change 'sort', 'sortOrder' and 'dispCount'.
@@ -55,7 +57,15 @@ const objToParams = (obj) => Object.keys(obj)
  */
 const mandarakeSearchURL = (searchDetails, lang) => (
   // Converts our search parameters to a query string.
-  `${orderURL}${objToParams({ ...searchDetails, lang })}`
+  `${MANDARAKE_ORDER_URL}?${objToParams({ ...searchDetails, lang })}`
+)
+
+/**
+ * Returns the URL we need to scrape the user's favorites.
+ * We just add the language, that's all.
+ */
+const mandarakeFavoritesURL = (lang) => (
+  `${MANDARAKE_FAVS_URL}?${objToParams({ lang })}`
 )
 
 /**
@@ -66,4 +76,17 @@ export const mandarakeSearch = (searchDetails, lang = 'ja') => {
   const search = { ...defaultDetails, ...searchDetails }
   const url = mandarakeSearchURL(search, lang)
   return fetchMandarakeSearch(url, search, lang)
+}
+
+/**
+ * Runs a search for a user's Mandarake favorites and returns either just the basic info
+ * (same as the search result info) or also extended shop availability info.
+ *
+ * A progress callback can be passed. This will be called during the lengthy detail
+ * fetching phase, which can take a long time if there are a lot of favorites.
+ * If we need to get extended info, we need to request the detail pages for all those items.
+ * The callback takes the signature (currItem, totalItems), both numbers.
+ */
+export const getMandarakeFavorites = (lang = 'ja', getExtendedInfo = false, progressCb = null) => {
+  return fetchMandarakeFavorites(mandarakeFavoritesURL(lang), lang, getExtendedInfo, progressCb)
 }

@@ -5,6 +5,6 @@
 
 import * as categories from './mandarake/categories'
 import * as shops from './mandarake/shops'
-export { mandarakeSearch as default } from './mandarake'
+export { mandarakeSearch as default, getMandarakeFavorites } from './mandarake'
 export { categories, shops }
 export { loadCookies, unloadCookies } from './util/request'
