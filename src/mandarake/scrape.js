@@ -4,7 +4,7 @@
  */
 
 import cheerio from 'cheerio'
-import { flattenDeep } from 'lodash'
+import { flattenDeep, noop } from 'lodash'
 import requestAsBrowser, { loadCookieFile } from 'requestAsBrowser'
 
 import * as shops from './shops'
@@ -225,7 +225,7 @@ export const fetchMandarakeSearch = async (url, searchDetails, lang) => {
  * depending on how many pages there are. We will try to request multiple
  * pages at the same time, but not too many.
  */
-export const fetchMandarakeFavorites = async (mainURL, lang, getExtendedInfo = false, progressCb = null) => {
+export const fetchMandarakeFavorites = async (mainURL, lang, getExtendedInfo = false, progressCb = noop) => {
   const mainContent = await requestAsBrowser(mainURL, cookie.jar)
   const $main = cheerio.load(mainContent.body)
 
