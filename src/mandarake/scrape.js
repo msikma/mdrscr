@@ -254,8 +254,5 @@ export const fetchMandarakeFavorites = async (mainURL, lang, getExtendedInfo = f
   // in order to find out which stores the item is in.
   // This data is only available on the detail page, and it's crucial for determining
   // the most efficient shopping list.
-  // TODO
-  const z = basicInfo.slice(0, 1)
-  const extendedInfo = await fetchExtendedInfo(z, lang, progressCb)
-  return extendedInfo
+  return fetchExtendedInfo(basicInfo, lang, progressCb)
 }
