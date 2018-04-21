@@ -26,7 +26,7 @@ export const ORDER_ITEM = code => `${MANDARAKE_ORDER_BASE}/order/detailPage/item
 const IN_STOCK = { ja: '在庫あります', en: 'In stock' }
 const IN_STOREFRONT = { ja: '在庫確認します', en: 'Store Front Item' }
 const PRICE = { ja: new RegExp('([0-9,]+)円(\\+税)?'), en: new RegExp('([0-9,]+) yen') }
-const ITEM_NO = new RegExp('(.+?)(\\(([0-9]+)\\))?$')
+const ITEM_NO = new RegExp('(.+?)(\\(([0-9-]+)\\))?$')
 
 // Container for our cookies.
 const cookie = {
@@ -35,9 +35,11 @@ const cookie = {
 
 /**
  * Loads a cookie file to use for every request.
+ * For correctly making authenticated requests to Mandarake, we need a cookie
+ * at domain='order.mandarake.co.jp', path='/', key='session_id'.
  */
 export const loadCookies = async (file) => {
-  cookie.jar = await loadCookieFile(file)
+  cookie.jar = (await loadCookieFile(file)).jar
 }
 
 /**
@@ -226,6 +228,12 @@ export const fetchMandarakeSearch = async (url, searchDetails, lang) => {
 export const fetchMandarakeFavorites = async (mainURL, lang, getExtendedInfo = false, progressCb = null) => {
   const mainContent = await requestAsBrowser(mainURL, cookie.jar)
   const $main = cheerio.load(mainContent.body)
+
+  // Check whether we're logged in or not. This is mandatory to fetch favorites.
+  const notLoggedIn = mainContent.body.indexOf('body class="login"') > -1
+  if (notLoggedIn) {
+    throw new TypeError('Not logged in')
+  }
 
   // Find out how many other pages there are, and request them too.
   const otherURLs = getFavoritesPages($main)
