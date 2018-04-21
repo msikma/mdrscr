@@ -36,7 +36,7 @@ const cookie = {
 /**
  * Loads a cookie file to use for every request.
  */
-export const loadCookies = (file) => {
+export const loadCookies = async (file) => {
   cookie.jar = await loadCookieFile(file)
 }
 
