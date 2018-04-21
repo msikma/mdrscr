@@ -5,7 +5,7 @@
 
 import cheerio from 'cheerio'
 import { flattenDeep } from 'lodash'
-import requestAsBrowser from 'requestAsBrowser'
+import requestAsBrowser, { loadCookieFile } from 'requestAsBrowser'
 
 import * as shops from './shops'
 
@@ -27,6 +27,25 @@ const IN_STOCK = { ja: '在庫あります', en: 'In stock' }
 const IN_STOREFRONT = { ja: '在庫確認します', en: 'Store Front Item' }
 const PRICE = { ja: new RegExp('([0-9,]+)円(\\+税)?'), en: new RegExp('([0-9,]+) yen') }
 const ITEM_NO = new RegExp('(.+?)(\\(([0-9]+)\\))?$')
+
+// Container for our cookies.
+const cookie = {
+  jar: null
+}
+
+/**
+ * Loads a cookie file to use for every request.
+ */
+export const loadCookies = (file) => {
+  cookie.jar = await loadCookieFile(file)
+}
+
+/**
+ * Unloads previously loaded cookies to send clean requests again.
+ */
+export const unloadCookies = () => {
+  cookie.jar = null
+}
 
 /**
  * Parses a price string, e.g. '500円+税', '1,000円+税' and returns only the number.
@@ -168,7 +187,7 @@ const fetchExtendedInfo = async (items, lang = 'ja', progressCb = null) => {
 
   return await Promise.all(items.map((item) => {
     return new Promise(async (resolve) => {
-      const data = await requestAsBrowser(item.link)
+      const data = await requestAsBrowser(item.link, cookie.jar)
       const extended = parseSingleDetailExtended(cheerio.load(data.body), lang)
       if (progressCb) progressCb(++downloaded, total)
       resolve({ ...item, ...extended })
@@ -193,7 +212,7 @@ const parseSingleDetailExtended = ($, lang) => {
  * This loads the given URL's HTML and parses the contents, returning the results as structured objects.
  */
 export const fetchMandarakeSearch = async (url, searchDetails, lang) => {
-  const data = await requestAsBrowser(url)
+  const data = await requestAsBrowser(url, cookie.jar)
   const $html = cheerio.load(data.body)
   return parseMandarakeSearch($html, url, searchDetails, lang)
 }
@@ -205,14 +224,14 @@ export const fetchMandarakeSearch = async (url, searchDetails, lang) => {
  * pages at the same time, but not too many.
  */
 export const fetchMandarakeFavorites = async (mainURL, lang, getExtendedInfo = false, progressCb = null) => {
-  const mainContent = await requestAsBrowser(mainURL)
+  const mainContent = await requestAsBrowser(mainURL, cookie.jar)
   const $main = cheerio.load(mainContent.body)
 
   // Find out how many other pages there are, and request them too.
   const otherURLs = getFavoritesPages($main)
   const otherCh = await Promise.all(otherURLs.map(url => (
     new Promise(async (resolve) => {
-      const pageContent = await requestAsBrowser(url)
+      const pageContent = await requestAsBrowser(url, cookie.jar)
       return resolve(cheerio.load(pageContent.body))
     })
   )))
