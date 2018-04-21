@@ -1,7 +1,7 @@
 {
   "name": "mdrscr",
   "description": "Mandarake scraping library",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "homepage": "https://github.com/msikma/mdrscr",
   "main": "dist/index.js",
   "scripts": {
@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "file-cookie-store": "msikma/file-cookie-store",
+    "requestAsBrowser": "msikma/requestAsBrowser",
     "lodash": "^4.17.5",
     "cheerio": "^1.0.0-rc.2",
     "include-path": "^0.4.7",

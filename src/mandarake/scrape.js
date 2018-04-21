@@ -5,8 +5,8 @@
 
 import cheerio from 'cheerio'
 import { flattenDeep } from 'lodash'
+import requestAsBrowser from 'requestAsBrowser'
 
-import { requestAsBrowser } from '../util/request'
 import * as shops from './shops'
 
 // List of shops by their English and Japanese names.
@@ -168,8 +168,8 @@ const fetchExtendedInfo = async (items, lang = 'ja', progressCb = null) => {
 
   return await Promise.all(items.map((item) => {
     return new Promise(async (resolve) => {
-      const html = await requestAsBrowser(item.link)
-      const extended = parseSingleDetailExtended(cheerio.load(html), lang)
+      const data = await requestAsBrowser(item.link)
+      const extended = parseSingleDetailExtended(cheerio.load(data.body), lang)
       if (progressCb) progressCb(++downloaded, total)
       resolve({ ...item, ...extended })
     })
@@ -193,8 +193,8 @@ const parseSingleDetailExtended = ($, lang) => {
  * This loads the given URL's HTML and parses the contents, returning the results as structured objects.
  */
 export const fetchMandarakeSearch = async (url, searchDetails, lang) => {
-  const html = await requestAsBrowser(url)
-  const $html = cheerio.load(html)
+  const data = await requestAsBrowser(url)
+  const $html = cheerio.load(data.body)
   return parseMandarakeSearch($html, url, searchDetails, lang)
 }
 
@@ -206,14 +206,14 @@ export const fetchMandarakeSearch = async (url, searchDetails, lang) => {
  */
 export const fetchMandarakeFavorites = async (mainURL, lang, getExtendedInfo = false, progressCb = null) => {
   const mainContent = await requestAsBrowser(mainURL)
-  const $main = cheerio.load(mainContent)
+  const $main = cheerio.load(mainContent.body)
 
   // Find out how many other pages there are, and request them too.
   const otherURLs = getFavoritesPages($main)
   const otherCh = await Promise.all(otherURLs.map(url => (
     new Promise(async (resolve) => {
       const pageContent = await requestAsBrowser(url)
-      return resolve(cheerio.load(pageContent))
+      return resolve(cheerio.load(pageContent.body))
     })
   )))
 
