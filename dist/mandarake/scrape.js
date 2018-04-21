@@ -56,7 +56,7 @@ var ORDER_ITEM = exports.ORDER_ITEM = function ORDER_ITEM(code) {
 var IN_STOCK = { ja: '在庫あります', en: 'In stock' };
 var IN_STOREFRONT = { ja: '在庫確認します', en: 'Store Front Item' };
 var PRICE = { ja: new RegExp('([0-9,]+)円(\\+税)?'), en: new RegExp('([0-9,]+) yen') };
-var ITEM_NO = new RegExp('(.+?)(\\(([0-9]+)\\))?$');
+var ITEM_NO = new RegExp('(.+?)(\\(([0-9-]+)\\))?$');
 
 // Container for our cookies.
 var cookie = {
@@ -64,6 +64,8 @@ var cookie = {
 
   /**
    * Loads a cookie file to use for every request.
+   * For correctly making authenticated requests to Mandarake, we need a cookie
+   * at domain='order.mandarake.co.jp', path='/', key='session_id'.
    */
 };var loadCookies = exports.loadCookies = function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(file) {
@@ -75,7 +77,7 @@ var cookie = {
             return (0, _requestAsBrowser.loadCookieFile)(file);
 
           case 2:
-            cookie.jar = _context.sent;
+            cookie.jar = _context.sent.jar;
 
           case 3:
           case 'end':
@@ -352,8 +354,8 @@ var fetchMandarakeSearch = exports.fetchMandarakeSearch = function () {
 var fetchMandarakeFavorites = exports.fetchMandarakeFavorites = function () {
   var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(mainURL, lang) {
     var getExtendedInfo = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var progressCb = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-    var mainContent, $main, otherURLs, otherCh, basicInfo, z, extendedInfo;
+    var progressCb = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : _lodash.noop;
+    var mainContent, $main, notLoggedIn, otherURLs, otherCh, basicInfo;
     return regeneratorRuntime.wrap(function _callee6$(_context6) {
       while (1) {
         switch (_context6.prev = _context6.next) {
@@ -365,10 +367,22 @@ var fetchMandarakeFavorites = exports.fetchMandarakeFavorites = function () {
             mainContent = _context6.sent;
             $main = _cheerio2.default.load(mainContent.body);
 
-            // Find out how many other pages there are, and request them too.
+            // Check whether we're logged in or not. This is mandatory to fetch favorites.
 
+            notLoggedIn = mainContent.body.indexOf('body class="login"') > -1;
+
+            if (!notLoggedIn) {
+              _context6.next = 7;
+              break;
+            }
+
+            throw new TypeError('Not logged in');
+
+          case 7:
+
+            // Find out how many other pages there are, and request them too.
             otherURLs = getFavoritesPages($main);
-            _context6.next = 7;
+            _context6.next = 10;
             return Promise.all(otherURLs.map(function (url) {
               return new Promise(function () {
                 var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(resolve) {
@@ -398,7 +412,7 @@ var fetchMandarakeFavorites = exports.fetchMandarakeFavorites = function () {
               }());
             }));
 
-          case 7:
+          case 10:
             otherCh = _context6.sent;
 
 
@@ -408,28 +422,16 @@ var fetchMandarakeFavorites = exports.fetchMandarakeFavorites = function () {
             // Return basic info only if we don't need extended shop availability information.
 
             if (getExtendedInfo) {
-              _context6.next = 11;
+              _context6.next = 14;
               break;
             }
 
             return _context6.abrupt('return', basicInfo);
 
-          case 11:
-
-            // Now that we have the basic info, we need to actually request every single item URL
-            // in order to find out which stores the item is in.
-            // This data is only available on the detail page, and it's crucial for determining
-            // the most efficient shopping list.
-            // TODO
-            z = basicInfo.slice(0, 1);
-            _context6.next = 14;
-            return fetchExtendedInfo(z, lang, progressCb);
-
           case 14:
-            extendedInfo = _context6.sent;
-            return _context6.abrupt('return', extendedInfo);
+            return _context6.abrupt('return', fetchExtendedInfo(basicInfo, lang, progressCb));
 
-          case 16:
+          case 15:
           case 'end':
             return _context6.stop();
         }
