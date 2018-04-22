@@ -33,7 +33,7 @@ const parseTimeLeft = (timeStr) => {
     days: parseInt(days, 10),
     hours: parseInt(hours, 10),
     minutes: parseInt(minutes, 10),
-    formattedTime: `${padToTwo(hours)}:${padToTwo(minutes)}`
+    formattedTime: `${hours}:${padToTwo(minutes)}`
   }
 }
 
