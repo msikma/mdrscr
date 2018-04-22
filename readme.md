@@ -139,6 +139,8 @@ The following parameters can be passed in a search:
 
 Most of the time, you probably want to pass only `keyword` and `categoryCode` and leave everything else at their defaults.
 
+For auction searches, you can only pass two arguments: `q` (for search query) and `category`. The latter must be a string, such as 'anime_cels' — you can import the selected strings from `auctionCategories`. The auction search is far more limited due to the fact that the site doesn't let us do much.
+
 ## Categories and shops
 
 All of Mandarake's category codes and shop codes are exposed in the `mainCategories` and `shops` exports:
