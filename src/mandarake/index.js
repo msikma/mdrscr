@@ -6,7 +6,7 @@
 import { getMandarakeSearch, getMandarakeFavorites } from './request'
 import { mandarakeSearchURL, mandarakeFavoritesURL } from './urls'
 import { EVERYTHING } from './categories'
-import { ALL_STORES } from './shops'
+import { ALL_STORES } from '../common/shops'
 
 // Default search details. Every search overrides these values.
 // You can change anything, but it's not recommended to change 'sort', 'sortOrder' and 'dispCount'.
@@ -43,7 +43,7 @@ const defaultDetails = {
 export const mandarakeSearch = (searchDetails, lang = 'ja') => {
   const search = { ...defaultDetails, ...searchDetails }
   const url = mandarakeSearchURL(search, lang)
-  return fetchMandarakeSearch(url, search, lang)
+  return getMandarakeSearch(url, search, lang)
 }
 
 /**

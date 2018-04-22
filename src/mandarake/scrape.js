@@ -6,15 +6,9 @@
 import cheerio from 'cheerio'
 import { flattenDeep } from 'lodash'
 
+import { shopsByName } from '../common/shopsByName'
 import { getExtendedInfo, getMultiplePages } from './request'
-import * as shops from './shops'
 import { MANDARAKE_ORDER_BASE, mandarakeOrderURL } from './urls'
-
-// List of shops by their English and Japanese names.
-const shopsByName = {
-  en: Object.values(shops).reduce((acc, shop) => ({ ...acc, [shop[1]]: shop[0] }), {}),
-  ja: Object.values(shops).reduce((acc, shop) => ({ ...acc, [shop[2]]: shop[0] }), {})
-}
 
 // Some constant strings and regular expressions for parsing result contents.
 const IN_STOCK = { ja: '在庫あります', en: 'In stock' }
@@ -57,6 +51,9 @@ const parseItemNo = (itemNo) => {
   return [itemNo]
 }
 
+/**
+ * Retrieves all pertinent information for one single item.
+ */
 const parseSingleSearchResult = ($, lang) => (n, entry) => {
   // Whether this is an adult item.
   const isAdult = $('.r18item', entry).length > 0
