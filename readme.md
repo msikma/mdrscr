@@ -95,7 +95,7 @@ When the Promise resolves:
        auctionType: '毎オク',
        shop: '札幌店',
        shopCode: '27',
-       categories: ['ギャラリー', '色紙'],
+       categories: [{ name: 'ギャラリー', slug: 'original_art' }, { name: '色紙', slug: 'shikishi' }],
        currentPrice: 4000,
        startingPrice: 4000,
        bids: 0,
