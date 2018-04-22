@@ -110,6 +110,14 @@ When the Promise resolves:
 It's possible to search your own favorites list, as long as you provide a cookie with a session ID so we can make logged in requests.
 
 ```js
+import { mandarakeFavorites } from 'mdrscr'
+
+const runTest = async () => {
+  // Cookies file must be in Netscape format.
+  await setupCookies('./cookies.txt')
+  const favs = await mandarakeFavorites('ja')
+  console.log(favs);
+}
 ```
 
 ## Search parameters
