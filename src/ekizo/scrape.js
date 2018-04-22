@@ -24,6 +24,9 @@ const padToTwo = str => str.length === 1 ? `0${str}` : str
  * An example: '13日18時間3分'. All numbers are regular width.
  */
 const parseTimeLeft = (timeStr) => {
+  if (timeStr === '入札開始前') {
+    return { type: 'pre-bidding' }
+  }
   const matches = timeStr.match(reTime)
   const days = matches[2] ? matches[2] : '0'
   const hours = matches[4] ? matches[4] : '0'
