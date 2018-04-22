@@ -5,46 +5,29 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.fetchMandarakeFavorites = exports.fetchMandarakeSearch = exports.parseSingleDetailExtended = undefined;
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; /**
-                                                                                                                                                                                                                                                                   * mdrscr - Mandarake Scraper <https://github.com/msikma/mdrscr>
-                                                                                                                                                                                                                                                                   * Copyright © 2018, Michiel Sikma
-                                                                                                                                                                                                                                                                   */
-
 var _cheerio = require('cheerio');
 
 var _cheerio2 = _interopRequireDefault(_cheerio);
 
 var _lodash = require('lodash');
 
+var _shopsByName = require('../common/shopsByName');
+
 var _request = require('./request');
 
-var _shops = require('./shops');
-
-var shops = _interopRequireWildcard(_shops);
-
 var _urls = require('./urls');
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; } /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * mdrscr - Mandarake Scraper <https://github.com/msikma/mdrscr>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * Copyright © 2018, Michiel Sikma
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                            */
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-// List of shops by their English and Japanese names.
-var shopsByName = {
-  en: Object.values(shops).reduce(function (acc, shop) {
-    return _extends({}, acc, _defineProperty({}, shop[1], shop[0]));
-  }, {}),
-  ja: Object.values(shops).reduce(function (acc, shop) {
-    return _extends({}, acc, _defineProperty({}, shop[2], shop[0]));
-  }, {})
-
-  // Some constant strings and regular expressions for parsing result contents.
-};var IN_STOCK = { ja: '在庫あります', en: 'In stock' };
+// Some constant strings and regular expressions for parsing result contents.
+var IN_STOCK = { ja: '在庫あります', en: 'In stock' };
 var IN_STOREFRONT = { ja: '在庫確認します', en: 'Store Front Item' };
 var PRICE = { ja: new RegExp('([0-9,]+)円(\\+税)?'), en: new RegExp('([0-9,]+) yen') };
 var ITEM_NO = new RegExp('(.+?)(\\(([0-9-]+)\\))?$');
@@ -86,6 +69,9 @@ var parseItemNo = function parseItemNo(itemNo) {
   return [itemNo];
 };
 
+/**
+ * Retrieves all pertinent information for one single item.
+ */
 var parseSingleSearchResult = function parseSingleSearchResult($, lang) {
   return function (n, entry) {
     // Whether this is an adult item.
@@ -99,7 +85,7 @@ var parseSingleSearchResult = function parseSingleSearchResult($, lang) {
     var image = isAdult ? $('.pic .r18item img', entry).attr('src') : $('.pic img', entry).attr('src');
 
     var shop = $('.basic .shop', entry).text().trim();
-    var shopCode = shopsByName[lang][shop];
+    var shopCode = _shopsByName.shopsByName[lang][shop];
     var itemNo = parseItemNo($('.basic .itemno', entry).text().trim());
 
     // If an item is in stock, it can either be set aside for online ordering,
@@ -168,7 +154,7 @@ var parseSingleDetailExtended = exports.parseSingleDetailExtended = function par
     return $(el).text().trim();
   }).get();
   var otherShops = otherShopNames.map(function (shop) {
-    return { shop: shop, shopCode: shopsByName[lang][shop] };
+    return { shop: shop, shopCode: _shopsByName.shopsByName[lang][shop] };
   });
   return {
     otherShops: otherShops

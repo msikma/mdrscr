@@ -16,7 +16,7 @@ var _urls = require('./urls');
 
 var _categories = require('./categories');
 
-var _shops = require('./shops');
+var _shops = require('../common/shops');
 
 // Default search details. Every search overrides these values.
 // You can change anything, but it's not recommended to change 'sort', 'sortOrder' and 'dispCount'.
@@ -54,7 +54,7 @@ var defaultDetails = {
 
   var search = _extends({}, defaultDetails, searchDetails);
   var url = (0, _urls.mandarakeSearchURL)(search, lang);
-  return fetchMandarakeSearch(url, search, lang);
+  return (0, _request.getMandarakeSearch)(url, search, lang);
 };
 
 /**
