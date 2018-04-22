@@ -10,12 +10,12 @@ A simple scraper library that parses Mandarake search results and returns the it
 The main export takes an object of search parameters and a language (either `ja` for Japanese or `en` for English; defaults to Japanese).
 
 ```js
-import mandarakeSearch, { categories } from 'mdrscr'
+import mandarakeSearch, { mainCategories } from 'mdrscr'
 
 // Search 'pokemon' in the comics category.
 const testSearch = {
   keyword: 'pokemon',
-  categoryCode: categories.COMICS[0]
+  categoryCode: mainCategories.COMICS[0]
 }
 
 const runTest = async () => {
@@ -59,6 +59,59 @@ An entry is mostly self-explanatory, but it's worth mentioning that the item num
 
 The price is always in Yen. `inStock` indicates whether a product is in stock, and `inStorefront` indicates if it is available at a physical Mandarake store. If the latter is true, it could be that someone bought the product since it was entered into the database — this will be checked after you decide to buy it and go to checkout.
 
+## Auction search
+
+To search the auction site:
+
+```js
+import { mandarakeAuctionSearch, auctionCategories } from './src'
+
+// Search auctions for 'ルパン三世' in the anime cels category. Note the different search format.
+// The auction site is more limited in search parameters, so is a query is included, our search results
+// have to be filtered by category manually afterwards.
+const testSearch = {
+  q: 'ルパン三世',
+  category: auctionCategories.ANIME_CELS[0]
+}
+
+const runTest = async () => {
+  // Note: no 'lang' parameter. The auction site is only available in Japanese.
+  const items = await mandarakeAuctionSearch(testSearch)
+  console.log(items)
+}
+```
+
+When the Promise resolves:
+
+```
+{ searchDetails: { q: 'ルパン三世', category: 'anime_cels' },
+  lang: 'ja',
+  url: 'https://ekizo.mandarake.co.jp/auction/item/itemsListJa.html?q=%E3%83%AB%E3%83%91%E3%83%B3%E4%B8%89%E4%B8%96&category=anime_cels',
+  entries:
+   [ { title: 'ルパン三世 次元大介',
+       itemNo: '03123456781234567',
+       link: 'https://ekizo.mandarake.co.jp/auction/item/itemInfoJa.html?index=xxxxx',
+       image: 'https://img.mandarake.co.jp/...imagelink.jpeg',
+       auctionType: '毎オク',
+       shop: '札幌店',
+       shopCode: '27',
+       categories: ['ギャラリー', '色紙'],
+       currentPrice: 4000,
+       startingPrice: 4000,
+       bids: 0,
+       watchers: 3,
+       timeLeft: { days: 8, hours: 20, minutes: 0, formattedTime: '20:00' } },
+     /* ...many more... */ ],
+  entryCount: 11 }
+```
+
+## Favorites search
+
+It's possible to search your own favorites list, as long as you provide a cookie with a session ID so we can make logged in requests.
+
+```js
+```
+
 ## Search parameters
 
 The following parameters can be passed in a search:
@@ -80,16 +133,16 @@ Most of the time, you probably want to pass only `keyword` and `categoryCode` an
 
 ## Categories and shops
 
-All of Mandarake's category codes and shop codes are exposed in the `categories` and `shops` exports:
+All of Mandarake's category codes and shop codes are exposed in the `mainCategories` and `shops` exports:
 
 ```js
-import { categories, shops } from 'mdrscr'
+import { mainCategories, shops } from 'mdrscr'
 ```
 
 Each item is an array containing the internal code, the English name and the Japanese name. For example:
 
 ```js
-console.log(categories.EVERYTHING)
+console.log(mainCategories.EVERYTHING)
 > ['00', 'Everything', 'すべて']
 console.log(shops.UTSUNOMIYA)
 > ['28', 'Utsunomiya', '宇都宮店']
