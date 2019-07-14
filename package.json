@@ -1,23 +1,24 @@
 {
   "name": "mdrscr",
   "description": "Mandarake scraping library",
-  "version": "1.3.2",
+  "version": "1.4.0",
   "homepage": "https://github.com/msikma/mdrscr",
   "main": "dist/index.js",
   "scripts": {
     "lint": "cross-env NODE_PATH=./ eslint src; exit 0",
-    "build": "babel src --presets babel-preset-env --plugins transform-class-properties,transform-object-rest-spread --out-dir dist"
+    "build": "babel src --presets @babel/preset-env --plugins @babel/plugin-proposal-class-properties,@babel/plugin-proposal-object-rest-spread,@babel/plugin-transform-regenerator --out-dir dist"
   },
   "repository": "https://github.com/msikma/mdrscr",
   "author": "Michiel Sikma <michiel@sikma.org>",
   "license": "MIT",
   "devDependencies": {
     "babel-eslint": "^7.2.3",
-    "babel-plugin-transform-class-properties": "^6.1.0",
-    "babel-plugin-transform-object-rest-spread": "^6.1.0",
-    "babel-polyfill": "^6.1.0",
-    "babel-preset-env": "^1.6.0",
-    "babel-register": "^6.1.0",
+    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/plugin-transform-regenerator": "^7.0.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/core": "^7.0.0",
     "eslint": "^4.4.1",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-plugin-import": "^2.2.0",
@@ -25,12 +26,13 @@
     "eslint-plugin-react": "^7.2.0"
   },
   "dependencies": {
-    "file-cookie-store": "msikma/file-cookie-store",
-    "requestAsBrowser": "msikma/requestAsBrowser",
-    "lodash": "^4.17.5",
+    "@babel/cli": "^7.0.0",
     "cheerio": "^1.0.0-rc.2",
+    "file-cookie-store": "msikma/file-cookie-store",
     "include-path": "^0.4.7",
+    "lodash": "^4.17.5",
     "request": "^2.83.0",
-    "request-promise-native": "^1.0.5"
+    "request-promise-native": "^1.0.5",
+    "requestAsBrowser": "msikma/requestAsBrowser"
   }
 }

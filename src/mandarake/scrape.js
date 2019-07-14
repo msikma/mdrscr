@@ -66,8 +66,8 @@ const parseSingleSearchResult = ($, lang) => (n, entry) => {
 
   // If this is an adult item, the image will be in a different place.
   const image = isAdult
-    ? $('.pic .r18item img', entry).attr('src')
-    : $('.pic img', entry).attr('src')
+    ? $('.pic .r18item img', entry).attr('src').trim()
+    : $('.pic img', entry).attr('src').trim()
 
   const shop = $('.basic .shop', entry).text().trim()
   const shopCode = shopsByName[lang][shop]
