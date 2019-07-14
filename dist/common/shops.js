@@ -1,28 +1,44 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.GREAT_AUCTION_TOURNAMENT = exports.DAILY_AUCTIONS = exports.SAPPORO = exports.KOKURA = exports.FUKUOKA = exports.GRANDCHAOS = exports.UMEDA = exports.UTSUNOMIYA = exports.NAGOYA = exports.IKEBUKURO = exports.SHIBUYA = exports.COMPLEX = exports.NAKANO = exports.SAHRA = exports.ALL_STORES = void 0;
+
 /**
  * mdrscr - Mandarake Scraper <https://github.com/msikma/mdrscr>
  * Copyright © 2018, Michiel Sikma
  */
+var ALL_STORES = ['0', 'All stores', 'すべて']; // Also called '全店舗'
 
-var ALL_STORES = exports.ALL_STORES = ['0', 'All stores', 'すべて']; // Also called '全店舗'
-var SAHRA = exports.SAHRA = ['55', 'SAHRA', 'SAHRA'];
-var NAKANO = exports.NAKANO = ['1', 'Nakano', '中野店'];
-var COMPLEX = exports.COMPLEX = ['30', 'Complex', 'コンプレックス'];
-var SHIBUYA = exports.SHIBUYA = ['6', 'Shibuya', '渋谷店'];
-var IKEBUKURO = exports.IKEBUKURO = ['26', 'Ikebukuro', '池袋店'];
-var NAGOYA = exports.NAGOYA = ['4', 'Nagoya', '名古屋店'];
-var UTSUNOMIYA = exports.UTSUNOMIYA = ['28', 'Utsunomiya', '宇都宮店'];
-var UMEDA = exports.UMEDA = ['7', 'Umeda', 'うめだ店'];
-var GRANDCHAOS = exports.GRANDCHAOS = ['23', 'Grandchaos', 'グランドカオス'];
-var FUKUOKA = exports.FUKUOKA = ['11', 'Fukuoka', '福岡店'];
-var KOKURA = exports.KOKURA = ['29', 'Kokura', '小倉店'];
-var SAPPORO = exports.SAPPORO = ['27', 'Sapporo', '札幌店'];
-
-// Not really shops, but shown in the same list on the auctions site.
+exports.ALL_STORES = ALL_STORES;
+var SAHRA = ['55', 'SAHRA', 'SAHRA'];
+exports.SAHRA = SAHRA;
+var NAKANO = ['1', 'Nakano', '中野店'];
+exports.NAKANO = NAKANO;
+var COMPLEX = ['30', 'Complex', 'コンプレックス'];
+exports.COMPLEX = COMPLEX;
+var SHIBUYA = ['6', 'Shibuya', '渋谷店'];
+exports.SHIBUYA = SHIBUYA;
+var IKEBUKURO = ['26', 'Ikebukuro', '池袋店'];
+exports.IKEBUKURO = IKEBUKURO;
+var NAGOYA = ['4', 'Nagoya', '名古屋店'];
+exports.NAGOYA = NAGOYA;
+var UTSUNOMIYA = ['28', 'Utsunomiya', '宇都宮店'];
+exports.UTSUNOMIYA = UTSUNOMIYA;
+var UMEDA = ['7', 'Umeda', 'うめだ店'];
+exports.UMEDA = UMEDA;
+var GRANDCHAOS = ['23', 'Grandchaos', 'グランドカオス'];
+exports.GRANDCHAOS = GRANDCHAOS;
+var FUKUOKA = ['11', 'Fukuoka', '福岡店'];
+exports.FUKUOKA = FUKUOKA;
+var KOKURA = ['29', 'Kokura', '小倉店'];
+exports.KOKURA = KOKURA;
+var SAPPORO = ['27', 'Sapporo', '札幌店']; // Not really shops, but shown in the same list on the auctions site.
 // English names are unofficial, since the auction site only exists in Japanese.
-var DAILY_AUCTIONS = exports.DAILY_AUCTIONS = ['-14', 'Daily Auctions', '毎日オークション'];
-var GREAT_AUCTION_TOURNAMENT = exports.GREAT_AUCTION_TOURNAMENT = ['14', 'Great Auction Tournament', '大オークション大会'];
+
+exports.SAPPORO = SAPPORO;
+var DAILY_AUCTIONS = ['-14', 'Daily Auctions', '毎日オークション'];
+exports.DAILY_AUCTIONS = DAILY_AUCTIONS;
+var GREAT_AUCTION_TOURNAMENT = ['14', 'Great Auction Tournament', '大オークション大会'];
+exports.GREAT_AUCTION_TOURNAMENT = GREAT_AUCTION_TOURNAMENT;

@@ -1,18 +1,19 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.mandarakeAuctionSearch = undefined;
+exports.mandarakeAuctionSearch = void 0;
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; /**
-                                                                                                                                                                                                                                                                   * mdrscr - Mandarake Scraper <https://github.com/msikma/mdrscr>
-                                                                                                                                                                                                                                                                   * Copyright © 2018, Michiel Sikma
-                                                                                                                                                                                                                                                                   */
+var _request = require("./request");
 
-var _request = require('./request');
+var _urls = require("./urls");
 
-var _urls = require('./urls');
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { keys.push.apply(keys, Object.getOwnPropertySymbols(object)); } if (enumerableOnly) keys = keys.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 // Default search details. Every search overrides these values.
 // The ability to customize these search results is far more limited than the regular site at the moment.
@@ -21,13 +22,18 @@ var defaultDetails = {
   q: '',
   // Limits results to a specific category.
   category: null
-
   /**
    * Main entry point. Retrieves the results of an auction search page
    * and returns the information of what's found there.
    */
-};var mandarakeAuctionSearch = exports.mandarakeAuctionSearch = function mandarakeAuctionSearch(searchDetails) {
-  var search = _extends({}, defaultDetails, searchDetails);
+
+};
+
+var mandarakeAuctionSearch = function mandarakeAuctionSearch(searchDetails) {
+  var search = _objectSpread({}, defaultDetails, {}, searchDetails);
+
   var url = (0, _urls.mandarakeAuctionSearchURL)(search);
   return (0, _request.getMandarakeAuctionSearch)(url, search);
 };
+
+exports.mandarakeAuctionSearch = mandarakeAuctionSearch;
