@@ -83,6 +83,20 @@ var parseItemNo = function parseItemNo(itemNo) {
   return [itemNo];
 };
 /**
+ * Parses a string containing the item's location (shop).
+ * Some shops have an additional indicator, e.g. "中野店 他1店".
+ */
+
+
+var parseShop = function parseShop(shopString, lang) {
+  var shop = shopString.split(' ');
+  var shopCode = _shopsByName.shopsByName[lang][shop[0]];
+  return {
+    shop: shop,
+    shopCode: shopCode
+  };
+};
+/**
  * Retrieves all pertinent information for one single item.
  */
 
@@ -96,8 +110,11 @@ var parseSingleSearchResult = function parseSingleSearchResult($, lang) {
     var link = isAdult ? (0, _urls.mandarakeOrderURL)($('.adult_link', entry).attr('id').trim()) : parseLink($('.pic a', entry).attr('href')); // If this is an adult item, the image will be in a different place.
 
     var image = isAdult ? $('.pic .r18item img', entry).attr('src').trim() : $('.pic img', entry).attr('src').trim();
-    var shop = $('.basic .shop', entry).text().trim();
-    var shopCode = _shopsByName.shopsByName[lang][shop];
+
+    var _parseShop = parseShop($('.basic .shop', entry).text().trim(), lang),
+        shop = _parseShop.shop,
+        shopCode = _parseShop.shopCode;
+
     var itemNo = parseItemNo($('.basic .itemno', entry).text().trim()); // If an item is in stock, it can either be set aside for online ordering,
     // or it can be on display in one of Mandarake's physical stores.
     // In the latter case, 'inStorefront' will be true.

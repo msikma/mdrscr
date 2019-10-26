@@ -1,12 +1,13 @@
 {
   "name": "mdrscr",
   "description": "Mandarake scraping library",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "homepage": "https://github.com/msikma/mdrscr",
   "main": "dist/index.js",
   "scripts": {
     "lint": "cross-env NODE_PATH=./ eslint src; exit 0",
-    "build": "babel src --presets @babel/preset-env --plugins @babel/plugin-proposal-class-properties,@babel/plugin-proposal-object-rest-spread,@babel/plugin-transform-regenerator --out-dir dist"
+    "build": "babel src --presets @babel/preset-env --plugins @babel/plugin-proposal-class-properties,@babel/plugin-proposal-object-rest-spread,@babel/plugin-transform-regenerator --out-dir dist",
+    "watch": "babel src --watch --presets @babel/preset-env --plugins @babel/plugin-proposal-class-properties,@babel/plugin-proposal-object-rest-spread,@babel/plugin-transform-regenerator --out-dir dist"
   },
   "repository": "https://github.com/msikma/mdrscr",
   "author": "Michiel Sikma <michiel@sikma.org>",
