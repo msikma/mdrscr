@@ -45,7 +45,7 @@ const runTest = async () => {
        itemNo: ['nitem-00XDSDC9', '0181099788'],
        image: 'https://img.mandarake.co.jp/...imagelink.jpg',
        link: 'https://order.mandarake.co.jp/order/...detailpage',
-       shop: '福岡店',
+       shop: ['福岡店'],
        shopCode: '11',
        price: 100,
        isAdult: false,
