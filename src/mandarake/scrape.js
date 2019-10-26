@@ -52,6 +52,16 @@ const parseItemNo = (itemNo) => {
 }
 
 /**
+ * Parses a string containing the item's location (shop).
+ * Some shops have an additional indicator, e.g. "中野店 他1店".
+ */
+const parseShop = (shopString, lang) => {
+  const shop = shopString.split(' ')
+  const shopCode = shopsByName[lang][shop[0]]
+  return { shop, shopCode }
+}
+
+/**
  * Retrieves all pertinent information for one single item.
  */
 const parseSingleSearchResult = ($, lang) => (n, entry) => {
@@ -69,8 +79,7 @@ const parseSingleSearchResult = ($, lang) => (n, entry) => {
     ? $('.pic .r18item img', entry).attr('src').trim()
     : $('.pic img', entry).attr('src').trim()
 
-  const shop = $('.basic .shop', entry).text().trim()
-  const shopCode = shopsByName[lang][shop]
+  const { shop, shopCode } = parseShop($('.basic .shop', entry).text().trim(), lang)
   const itemNo = parseItemNo($('.basic .itemno', entry).text().trim())
 
   // If an item is in stock, it can either be set aside for online ordering,
