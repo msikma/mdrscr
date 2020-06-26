@@ -5,8 +5,8 @@
 
 import '@babel/polyfill'
 import '@babel/plugin-transform-regenerator'
-import mandarakeSearch, { mandarakeFavorites, mandarakeAuctionSearch, loadCookies, unloadCookies, mainCategories, auctionCategories, shops } from './export'
-export { mandarakeSearch as default, mandarakeFavorites }
-export { mandarakeAuctionSearch }
+import { mandarakeSearch, mandarakeFavorites, mandarakeAuctionSearch, loadCookies, unloadCookies, mainCategories, auctionCategories, shops } from './export'
+export { mandarakeSearch, mandarakeAuctionSearch, mandarakeFavorites }
+export { mandarakeSearch as searchMain, mandarakeAuctionSearch as searchAuctions }
 export { loadCookies, unloadCookies }
 export { mainCategories, auctionCategories, shops }

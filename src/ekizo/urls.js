@@ -16,6 +16,11 @@ export const MANDARAKE_AUCTION_INDEX = `${MANDARAKE_AUCTION_PATH}itemsListJa.htm
 export const mandarakeAuctionObjectURL = id => `${MANDARAKE_AUCTION_INDEX}?index=${id}`
 
 // Returns the URL for an auction search request.
-export const mandarakeAuctionSearchURL = (searchDetails) => (
-  `${MANDARAKE_AUCTION_INDEX}?${objToParams({ ...searchDetails })}`
-)
+export const mandarakeAuctionSearchURL = (searchDetails) => {
+  // 'keyword' is accepted for consistency with the main search, but the URL
+  // requires it be named 'q'.
+  searchDetails.q = searchDetails.keyword
+  delete searchDetails.keyword
+  
+  return `${MANDARAKE_AUCTION_INDEX}?${objToParams({ ...searchDetails })}`
+}

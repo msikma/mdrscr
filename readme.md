@@ -10,7 +10,7 @@ A simple scraper library that parses Mandarake search results and returns the it
 The main export takes an object of search parameters and a language (either `ja` for Japanese or `en` for English; defaults to Japanese).
 
 ```js
-import mandarakeSearch, { mainCategories } from 'mdrscr'
+import { searchMain, mainCategories } from 'mdrscr'
 
 // Search 'pokemon' in the comics category.
 const testSearch = {
@@ -19,12 +19,12 @@ const testSearch = {
 }
 
 const runTest = async () => {
-  const items = await mandarakeSearch(testSearch, 'ja')
-  console.log(items)
+  const results = await searchMain(testSearch, 'ja')
+  console.log(results)
 }
 ```
 
-`mandarakeScraper()` returns a Promise, so if you're not using async/await you can set a `.then()` function instead. Once the Promise resolves, `items` contains an array of search results, e.g.:
+`searchMain()` returns a Promise, so if you're not using async/await you can set a `.then()` function instead. Once the Promise resolves, `results.entries` contains an array of search results, e.g.:
 
 ```
 { searchDetails:
@@ -64,7 +64,7 @@ The price is always in Yen. `inStock` indicates whether a product is in stock, a
 To search the auction site:
 
 ```js
-import { mandarakeAuctionSearch, auctionCategories } from './src'
+import { searchAuctions, auctionCategories } from './src'
 
 // Search auctions for 'ルパン三世' in the anime cels category. Note the different search format.
 // The auction site is more limited in search parameters, so is a query is included, our search results
@@ -76,8 +76,8 @@ const testSearch = {
 
 const runTest = async () => {
   // Note: no 'lang' parameter. The auction site is only available in Japanese.
-  const items = await mandarakeAuctionSearch(testSearch)
-  console.log(items)
+  const results = await searchAuctions(testSearch)
+  console.log(results)
 }
 ```
 

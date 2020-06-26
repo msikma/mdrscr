@@ -10,7 +10,7 @@ import { mandarakeAuctionSearchURL } from './urls'
 // The ability to customize these search results is far more limited than the regular site at the moment.
 const defaultDetails = {
   // Search query. Unlike regular Mandarake searches, if this is empty we get nothing.
-  q: '',
+  keyword: '',
   // Limits results to a specific category.
   category: null
 }
