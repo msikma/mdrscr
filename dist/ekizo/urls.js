@@ -32,6 +32,10 @@ var mandarakeAuctionObjectURL = function mandarakeAuctionObjectURL(id) {
 exports.mandarakeAuctionObjectURL = mandarakeAuctionObjectURL;
 
 var mandarakeAuctionSearchURL = function mandarakeAuctionSearchURL(searchDetails) {
+  // 'keyword' is accepted for consistency with the main search, but the URL
+  // requires it be named 'q'.
+  searchDetails.q = searchDetails.keyword;
+  delete searchDetails.keyword;
   return "".concat(MANDARAKE_AUCTION_INDEX, "?").concat((0, _query.objToParams)(_objectSpread({}, searchDetails)));
 };
 
