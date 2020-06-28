@@ -20,12 +20,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /**
  * This loads the auction URL's HTML and calls the parser to extract the info.
  */
-var getMandarakeAuctionSearch =
-/*#__PURE__*/
-function () {
-  var _ref = _asyncToGenerator(
-  /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee(url, searchDetails) {
+var getMandarakeAuctionSearch = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(url, searchDetails) {
     var data;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
