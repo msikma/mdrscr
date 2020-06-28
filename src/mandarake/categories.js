@@ -213,6 +213,7 @@ export const COLLECTION = ['030604', 'Collection', 'コレクション(TOYなど
 export const MILITARY_REFERENCE_TYPE = ['030605', 'Military', 'ミリタリー']
 export const FOODS_DRINKS = ['030606', 'Foods/Drinks', '食べ物・飲み物']
 export const OTHERS_BRAND_NEW_REFERENCE_TYPE_DOUJINSHI = ['030699', 'Others', 'その他']
+export const AV_GAME_CD = ['0401', 'AV/Game CDs', 'AV・GAME CD']
 export const ANIME_CD = ['040101', 'Anime', 'アニメ']
 export const TOKUSATSU_CD = ['040102', 'Tokusatsu', '特撮']
 export const KAMEN_RIDER_ULTRAMAN_SENTAI = ['040106', 'Kamen rider / Ultraman / Sentai', '仮面ライダー / ウルトラマン / 戦隊']
