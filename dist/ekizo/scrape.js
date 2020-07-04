@@ -139,8 +139,12 @@ var parseSearchResult = function parseSearchResult($) {
  */
 
 
-var fetchMandarakeAuctionSearch = /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(html, url, searchDetails) {
+var fetchMandarakeAuctionSearch =
+/*#__PURE__*/
+function () {
+  var _ref = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee(html, url, searchDetails) {
     var $, entriesUnfiltered, entries;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
