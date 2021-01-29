@@ -66,12 +66,12 @@ const parseShop = (shopString, lang) => {
  */
 const parseSingleSearchResult = ($, lang) => (n, entry) => {
   // Whether this is an adult item.
-  const isAdult = $('.r18item', entry).length > 0
+  const isAdult = $('.r18mark', entry).length > 0
 
   // Adult items hide the link to the item's detail page.
   // Either generate the link from the item code, or take it from the <a> tag.
   const link = isAdult
-    ? mandarakeOrderURL($('.adult_link', entry).attr('id').trim())
+    ? $('img:not(.r18mark img)', entry).attr('src').trim()
     : parseLink($('.pic a', entry).attr('href'))
 
   // If this is an adult item, the image will be in a different place.
