@@ -66,7 +66,7 @@ const parseShop = (shopString, lang) => {
  */
 const parseSingleSearchResult = ($, lang) => (n, entry) => {
   // Whether this is an adult item.
-  const isAdult = $('.r18item', entry).length > 0
+  const isAdult = $('.r18mark', entry).length > 0
 
   // Adult items hide the link to the item's detail page.
   // Either generate the link from the item code, or take it from the <a> tag.
@@ -76,7 +76,7 @@ const parseSingleSearchResult = ($, lang) => (n, entry) => {
 
   // If this is an adult item, the image will be in a different place.
   const image = isAdult
-    ? $('.pic .r18item img', entry).attr('src').trim()
+    ? $('img:not(.r18mark img)', entry).attr('src').trim()
     : $('.pic img', entry).attr('src').trim()
 
   const { shop, shopCode } = parseShop($('.basic .shop', entry).text().trim(), lang)
