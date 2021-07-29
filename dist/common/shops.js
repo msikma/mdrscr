@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.GREAT_AUCTION_TOURNAMENT = exports.DAILY_AUCTIONS = exports.SAPPORO = exports.KOKURA = exports.FUKUOKA = exports.GRANDCHAOS = exports.UMEDA = exports.UTSUNOMIYA = exports.NAGOYA = exports.IKEBUKURO = exports.SHIBUYA = exports.COMPLEX = exports.NAKANO = exports.SAHRA = exports.ALL_STORES = void 0;
+exports.GREAT_AUCTION_TOURNAMENT = exports.DAILY_AUCTIONS = exports.SAPPORO = exports.KOKURA = exports.FUKUOKA = exports.GRANDCHAOS = exports.UMEDA = exports.UTSUNOMIYA = exports.NAGOYA = exports.NAYUTA = exports.IKEBUKURO = exports.SHIBUYA = exports.COCOO = exports.COMPLEX = exports.NAKANO = exports.SAHRA = exports.ALL_STORES = void 0;
 
 /**
  * mdrscr - Mandarake Scraper <https://github.com/msikma/mdrscr>
@@ -18,10 +18,14 @@ var NAKANO = ['1', 'Nakano', '中野店'];
 exports.NAKANO = NAKANO;
 var COMPLEX = ['30', 'Complex', 'コンプレックス'];
 exports.COMPLEX = COMPLEX;
+var COCOO = ['33', 'CoCoo', 'CoCoo'];
+exports.COCOO = COCOO;
 var SHIBUYA = ['6', 'Shibuya', '渋谷店'];
 exports.SHIBUYA = SHIBUYA;
-var IKEBUKURO = ['26', 'Ikebukuro', '池袋店'];
+var IKEBUKURO = ['26', 'Rarara (Ikebukuro)', 'ラララ（池袋店）'];
 exports.IKEBUKURO = IKEBUKURO;
+var NAYUTA = ['32', 'Nayuta', '那由多'];
+exports.NAYUTA = NAYUTA;
 var NAGOYA = ['4', 'Nagoya', '名古屋店'];
 exports.NAGOYA = NAGOYA;
 var UTSUNOMIYA = ['28', 'Utsunomiya', '宇都宮店'];
