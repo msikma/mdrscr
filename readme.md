@@ -3,6 +3,13 @@
 mdrscr - Mandarake Scraper
 ==========================
 
+> [!WARNING]  
+> This library is very old and not very well tested. It will also not be updated anymore. It still seems to work as of late 2024, but you need to provide at least the following cookie:
+>
+```
+.mandarake.co.jp	TRUE	/	FALSE	1769524304	tr_mndrk_user	any_value
+```
+
 A simple scraper library that parses Mandarake search results and returns the items found there.
 
 ## Usage
